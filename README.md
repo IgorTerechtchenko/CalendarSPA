@@ -1,3 +1,3 @@
 # CalendarSPA
 
-Single Page Application calendar.y
+Single Page Application calendar.

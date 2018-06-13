@@ -1,0 +1,28 @@
+.font {
+    font-family: 'Roboto', sans-serif;
+}
+
+table {
+    border: 2px solid DodgerBlue;
+    border-collapse: collapse;
+    position: relative;
+    table-layout: fixed;
+    width: 50%;
+}
+
+td, tr, th {
+    border: 2px solid DodgerBlue;
+} 
+
+.header {
+  width: 90%;
+}
+
+.wrapper {
+  margin: 25px 50px;
+}
+
+a.active {
+  color: green;
+  font-weight: bold;
+}
