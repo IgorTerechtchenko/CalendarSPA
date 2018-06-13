@@ -148,7 +148,7 @@ function drawInteractiveCalendar(year, month, el, options) {
     var info;
     if(options['local']) {
       if(event.target.innerHTML) {
-        info = window.prompt('add info:', 'info'); 
+        info = window.prompt('add info:', e.target.innerHTML); 
         if(info != null) {
           storage.setItem(e.target.className, info);
           e.target.innerHTML += '<br>' + info; 

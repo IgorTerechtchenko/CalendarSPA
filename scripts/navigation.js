@@ -14,7 +14,6 @@ document.body.addEventListener("click", function(ev) {
     return;
   }
   ev.preventDefault();
-  // При клике по ссылке - обновлять URL
   var url = ev.target.getAttribute("href");
   window.location.hash = url;
 });
