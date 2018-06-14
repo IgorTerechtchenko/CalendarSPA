@@ -136,6 +136,7 @@ function drawInteractiveCalendar(year, month, el, options) {
   }
 
   function addDayClickListeners() {
+    if(!options['addTasks']) {return};
     var daysArray = el.getElementsByTagName('div')[0].getElementsByTagName('td');
     for(var i = 0; i < daysArray.length; i++) {
       if(daysArray[i].innerHTML) {

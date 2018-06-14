@@ -1,5 +1,5 @@
+var calendarOptions = {local: true, };
 function updateContent(url) {
-  var calendarOptions = {};
   var contentEl = document.getElementById('content');
   contentEl.innerHTML = '';
   if(url === '/calendar') {
@@ -13,18 +13,28 @@ function updateContent(url) {
     var optionsTextArray = ['allow change month', 'allow add tasks', 'allow remove tasks', 'display month/year'];
     var optionsPropNames = ['changeMonth', 'addTasks', 'removeTasks', 'showMonth'];
     optionsTextArray.forEach(function(text) {
-      optionsListElement.innerHTML += ('<li><input type="checkbox">' + text + '</input></li>');
+      //making checkboxes checked according to options
+      var optionIndex = optionsPropNames[optionsTextArray.indexOf(text)];
+      console.log('option index', optionIndex, calendarOptions[optionIndex]);
+      var checked = '';
+      if(calendarOptions[optionIndex]) {
+        checked = 'checked';
+      }
+      console.log(checked);
+      optionsListElement.innerHTML += ('<li><input type="checkbox"' + checked + '>' + text + '</input></li>');
     });
     contentEl.innerHTML = '';
     contentEl.appendChild(optionsListElement);
     var checkboxes = Array.from(document.getElementsByTagName('input')); 
-    for(var i = 0; i < optionsPropNames.length - 1; i++) {
-      checkboxes[i].addEventListener('change', function(e) {
-        calendarOptions[optionsPropNames[i]] = e.target.checked; 
-        console.log(checkboxes[i], optionsPropNames[i]);
+    //adding checkbox processing
+    //iterating through checkboxes would be more complex due to closure
+    optionsPropNames.forEach(function(name) {
+      checkboxes[optionsPropNames.indexOf(name)].addEventListener('change', function(e) {
+        calendarOptions[name] = e.target.checked; 
+        console.log(name);
         console.log(calendarOptions);
       });
-    };
+    });
     console.log(calendarOptions);
   }
   if(url === '/about') {
