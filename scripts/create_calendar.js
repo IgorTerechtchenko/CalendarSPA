@@ -159,6 +159,9 @@ function drawInteractiveCalendar(year, month, el, options) {
         }
       }
     }
+    if(options['removeTasks']) {
+      addRemoveButton(e.target);
+    }
   }
   
   function addDateInfoField() {
@@ -179,22 +182,26 @@ function drawInteractiveCalendar(year, month, el, options) {
 
   function addRemoveTaskButtons() {
     if(!options['removeTasks']) {return;}
-    console.log('add remove buttons');
     var cells = innerEl.getElementsByTagName('table')[0].getElementsByTagName('td');
     var button;
     cells = Array.from(cells);
     cells.forEach(function(cell) {
-      var info = storage.getItem(cell.classList) ? storage.getItem(cell.classList) : false;
-      if(info) {
-        button = document.createElement('button');
-        button.innerHTML = 'x'
-        button.className = cell.className + ' button';
-        button.addEventListener('click', function() {
-          cell.innerHTML = cell.innerHTML.split('<br>')[0];
-          storage.setItem(cell.className, '');
-        });
-        cell.appendChild(button);
-      }
+      addRemoveButton(cell);
     });
+  }
+
+  function addRemoveButton(cell) {
+    var info = storage.getItem(cell.classList) ? storage.getItem(cell.classList) : false;
+    if(info) {
+      button = document.createElement('button');
+      button.innerHTML = 'x'
+      button.className = cell.className + ' button';
+      button.addEventListener('click', function(e) {
+        cell.innerHTML = cell.innerHTML.split('<br>')[0];
+        storage.removeItem(cell.className);
+        e.setPropagation(); //no bubbling for nested button
+      });
+      cell.appendChild(button);
+    }
   }
 }
