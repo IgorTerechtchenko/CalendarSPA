@@ -68,7 +68,7 @@ function drawInteractiveCalendar(year, month, el, options) {
   infoArea.innerHTML += 'info <br>'
 
   //creating buttons
-  if(options['buttons']) {
+  if(options['changeMonth']) {
     var leftButton = document.createElement('button');
     var rightButton = document.createElement('button');
     var r = document.createTextNode('>');
@@ -86,7 +86,7 @@ function drawInteractiveCalendar(year, month, el, options) {
     el.appendChild(rightButton);
   }
   //adding month display if buttons are not required
-  if(!options['buttons']) {
+  if(!options['changeMonth']) {
     el.appendChild(header);
   }
   drawCalendar(currentDate.getFullYear(), currentDate.getMonth(), innerEl);
@@ -148,9 +148,10 @@ function drawInteractiveCalendar(year, month, el, options) {
     var info;
     if(options['local']) {
       if(event.target.innerHTML) {
-        info = window.prompt('add info:', e.target.innerHTML); 
+        info = window.prompt('add info:', e.target.innerHTML.split('<br>')[1]); 
         if(info != null) {
           storage.setItem(e.target.className, info);
+          e.target.innerHTML = e.target.innerHTML.split('<br>')[0]
           e.target.innerHTML += '<br>' + info; 
         }
       }
