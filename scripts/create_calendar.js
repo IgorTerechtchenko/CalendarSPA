@@ -197,9 +197,11 @@ function drawInteractiveCalendar(year, month, el, options) {
       button.innerHTML = 'x'
       button.className = cell.className + ' button';
       button.addEventListener('click', function(e) {
-        cell.innerHTML = cell.innerHTML.split('<br>')[0];
-        storage.removeItem(cell.className);
-        e.setPropagation(); //no bubbling for nested button
+        if(window.confirm('deleting task')) {
+          cell.innerHTML = cell.innerHTML.split('<br>')[0];
+          storage.removeItem(cell.className);
+        }
+        e.stopPropagation(); //no bubbling for nested button
       });
       cell.appendChild(button);
     }

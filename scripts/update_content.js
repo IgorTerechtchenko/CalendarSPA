@@ -15,14 +15,13 @@ function updateContent(url) {
     optionsTextArray.forEach(function(text) {
       //making checkboxes checked according to options
       var optionIndex = optionsPropNames[optionsTextArray.indexOf(text)];
-      console.log('option index', optionIndex, calendarOptions[optionIndex]);
       var checked = '';
       if(calendarOptions[optionIndex]) {
         checked = 'checked';
       }
-      console.log(checked);
       optionsListElement.innerHTML += ('<li><input type="checkbox"' + checked + '>' + text + '</input></li>');
     });
+
     contentEl.innerHTML = '';
     contentEl.appendChild(optionsListElement);
     var checkboxes = Array.from(document.getElementsByTagName('input')); 
@@ -31,11 +30,8 @@ function updateContent(url) {
     optionsPropNames.forEach(function(name) {
       checkboxes[optionsPropNames.indexOf(name)].addEventListener('change', function(e) {
         calendarOptions[name] = e.target.checked; 
-        console.log(name);
-        console.log(calendarOptions);
       });
     });
-    console.log(calendarOptions);
   }
   if(url === '/about') {
     var aboutEl = document.createElement('div');

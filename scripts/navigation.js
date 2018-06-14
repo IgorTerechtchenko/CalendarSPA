@@ -3,9 +3,8 @@ function handleUrl(url) {
       .querySelectorAll("a.active")
       .forEach(function(el){el.classList.remove("active");});
   document
-    .querySelectorAll('a[href="' + url.split("#").pop() + '"]')
-    .forEach(el => el.classList.add("active"));
-  console.log(url.split('#').pop());
+      .querySelectorAll('a[href="' + url.split("#").pop() + '"]')
+      .forEach(el => el.classList.add("active"));
   updateContent(url.split('#').pop());
 }
 
