@@ -94,6 +94,7 @@ function drawInteractiveCalendar(year, month, el, options) {
   el.appendChild(infoArea);
   addDayClickListeners();
   fillTableCells();
+  addRemoveTaskButtons();
   addDateInfoField();
 
   function changeDate(direction) {
@@ -133,6 +134,7 @@ function drawInteractiveCalendar(year, month, el, options) {
     header.appendChild(d);
     addDayClickListeners();
     fillTableCells();
+    addRemoveTaskButtons();
   }
 
   function addDayClickListeners() {
@@ -172,6 +174,27 @@ function drawInteractiveCalendar(year, month, el, options) {
     cells.forEach(function(cell) {
       var info = storage.getItem(cell.classList) ? storage.getItem(cell.classList) : false;
       cell.innerHTML += ('<br>' + (info || ''));
+    });
+  }
+
+  function addRemoveTaskButtons() {
+    if(!options['removeTasks']) {return;}
+    console.log('add remove buttons');
+    var cells = innerEl.getElementsByTagName('table')[0].getElementsByTagName('td');
+    var button;
+    cells = Array.from(cells);
+    cells.forEach(function(cell) {
+      var info = storage.getItem(cell.classList) ? storage.getItem(cell.classList) : false;
+      if(info) {
+        button = document.createElement('button');
+        button.innerHTML = 'x'
+        button.className = cell.className + ' button';
+        button.addEventListener('click', function() {
+          cell.innerHTML = cell.innerHTML.split('<br>')[0];
+          storage.setItem(cell.className, '');
+        });
+        cell.appendChild(button);
+      }
     });
   }
 }

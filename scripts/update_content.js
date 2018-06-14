@@ -1,4 +1,4 @@
-var calendarOptions = {local: true, };
+var calendarOptions = {local: true, addTasks: true, removeTasks: true, showMonth: true, };
 function updateContent(url) {
   var contentEl = document.getElementById('content');
   contentEl.innerHTML = '';
